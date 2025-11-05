@@ -17,7 +17,7 @@ export default function BannerCard(props: { banner?: BannerDto; delete?: () => v
             sm={6}
             xs={12}
         >
-            <Card sx={{ height: 400 }}>
+            <Card sx={{ height: 400, width: '300px' }}>
                 <CardOverflow>
                     <Image url={props.banner?.imageUrl} />
                 </CardOverflow>
