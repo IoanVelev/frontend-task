@@ -10,8 +10,8 @@ export default function BannerForm() {
                 </FormControl>
 
                 <FormControl>
-                    <FormLabel>Title</FormLabel>
-                    <Input placeholder="Enter banner title" />
+                    <FormLabel>Link</FormLabel>
+                    <Input placeholder="Enter destination link" />
                 </FormControl>
             </Stack>
         </form>
