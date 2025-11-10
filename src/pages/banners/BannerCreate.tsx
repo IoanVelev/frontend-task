@@ -4,6 +4,7 @@ import { Button } from '@mui/joy'
 import { usePageData } from '../../context/page-data/page-data.context'
 import { useEffect } from 'react'
 import { BannerDto } from '../../services/dto/banner.dto'
+import { v4 as uuidv4 } from 'uuid';
 
 export default function BannerCreate() {
     const { setPageData } = usePageData()
@@ -13,7 +14,13 @@ export default function BannerCreate() {
     }, [setPageData])
 
     const handleCreate = (values: BannerDto) => {
-        console.log('Create banner values:', values)
+        const newBanner: BannerDto = {
+            id: uuidv4(),
+            imageUrl: values.imageUrl,
+            link: values.link
+        }
+        console.log(newBanner);
+        
     }
     return (
         <>
