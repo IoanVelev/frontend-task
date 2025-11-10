@@ -18,7 +18,7 @@ export default function BannerCreate() {
     return (
         <>
             <BannerForm onSubmit={handleCreate} />
-            <Box sx={{ mt: 5, display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ mt: 10, display: 'flex', justifyContent: 'center' }}>
                 <Button
                     form="banner-form"
                     type="submit"
