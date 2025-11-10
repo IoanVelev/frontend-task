@@ -5,6 +5,7 @@ import { usePageData } from '../../context/page-data/page-data.context'
 import { useEffect } from 'react'
 import { BannerDto } from '../../services/dto/banner.dto'
 import { v4 as uuidv4 } from 'uuid';
+import bannerService from '../../services/banner.service'
 
 export default function BannerCreate() {
     const { setPageData } = usePageData()
@@ -19,8 +20,8 @@ export default function BannerCreate() {
             imageUrl: values.imageUrl,
             link: values.link
         }
-        console.log(newBanner);
         
+        bannerService.createBanner(newBanner);
     }
     return (
         <>
