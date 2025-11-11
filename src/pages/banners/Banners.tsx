@@ -22,7 +22,7 @@ export default function Banners() {
                         banner={banner}
                         delete={async () => {
                             deleteItem(banner.id!)
-                            BannerService.deleteBanner(banner.id!)
+                            await BannerService.deleteBanner(banner.id!)
                                 .catch((reason) => console.error(reason))
                         }}
                     />
