@@ -61,7 +61,7 @@ export default function BannerCard(props: { banner?: BannerDto; delete?: () => v
                         variant="solid"
                         type={'button'}
                         size="md"
-                        onClick={() => navigate({ pathname: `/banners/${props.banner!.id}/details` })}
+                        onClick={() => navigate({ pathname: `/banners/${props.banner!.id}` })}
                         color="primary"
                         sx={{ width: '75%', alignSelf: 'center', fontWeight: 600 }}
                     >
