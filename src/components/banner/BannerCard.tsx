@@ -57,6 +57,16 @@ export default function BannerCard(props: { banner?: BannerDto; delete?: () => v
                     </Box>
                 </Box>
                 <CardActions>
+                    <Button
+                        variant="solid"
+                        type={'button'}
+                        size="md"
+                        onClick={() => navigate({ pathname: `/banners/${props.banner!.id}/details` })}
+                        color="primary"
+                        sx={{ width: '75%', alignSelf: 'center', fontWeight: 600 }}
+                    >
+                        Details
+                    </Button>
                     <IconButton
                         variant="outlined"
                         size="sm"
