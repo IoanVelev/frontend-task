@@ -31,11 +31,13 @@ export default function ScrollableCards<T>(props: {
         if (!newCards) {
             return
         }
-        let currentCards = [...cards]
+    
         setPage(newCards.pageNumber)
         setHasMore(newCards.maxPageNumber > newCards.pageNumber)
+
         const newElements = newCards.content.map((value) => props.mapCard(value, deleteItem))
-        setCards([...currentCards, ...newElements])
+
+        setCards(prev => page === 0 ? newElements : [...prev, ...newElements])
     }, [cards, page, deleteItem, props])
 
     useEffect(() => {
