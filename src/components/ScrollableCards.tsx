@@ -15,15 +15,7 @@ export default function ScrollableCards<T>(props: {
     const [hasMore, setHasMore] = useState<boolean>(true)
 
     const deleteItem = useCallback((id: string) => {
-        setCards((prevCardsState) => {
-            const i = prevCardsState.findIndex((card) => card.key == id)
-            if (i != -1) {
-                const newCards = [...prevCardsState]
-                newCards.splice(i, 1)
-                return newCards
-            }
-            return prevCardsState
-        })
+        setCards(prev => prev.filter(card => card.key !== id))
     }, [])
 
     const loadBanners = useCallback(async () => {
@@ -38,10 +30,9 @@ export default function ScrollableCards<T>(props: {
         const newElements = newCards.content.map((value) => props.mapCard(value, deleteItem))
 
         setCards(prev => page === 0 ? newElements : [...prev, ...newElements])
-    }, [page, deleteItem])
+    }, [page, deleteItem, props])
 
     useEffect(() => {
-        if (page != 0) return
         loadBanners().catch((reason) => console.error(reason))
     }, [])
 
@@ -59,7 +50,7 @@ export default function ScrollableCards<T>(props: {
                 next={loadMore}
                 hasMore={hasMore}
                 scrollableTarget="scroll"
-                loader={<h4>Loading...</h4>}
+                loader={ !cards && <h4>Loading...</h4>}
                 endMessage={
                     <p style={{ textAlign: 'center' }}>
                         <b>There are no more items available...</b>
