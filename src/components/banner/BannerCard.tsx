@@ -16,11 +16,6 @@ export default function BannerCard(props: { banner?: BannerDto; delete?: () => v
         return match ? match[1] : url
     }
 
-    const onDelete = () => {
-        bannerService.deleteBanner(props.banner!.id!)
-        navigate('/banners')
-    }
-
     return (
         <Grid
             xl={3}
@@ -76,7 +71,7 @@ export default function BannerCard(props: { banner?: BannerDto; delete?: () => v
                         variant="outlined"
                         size="sm"
                         sx={{ width: '20%', alignSelf: 'center' }}
-                        onClick={() => onDelete()}
+                        onClick={props.delete}
                     >
                         <Delete />
                     </IconButton>
