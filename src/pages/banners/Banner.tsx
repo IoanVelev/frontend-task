@@ -1,4 +1,6 @@
-import { Box, Button, Card, CardContent, Grid, Typography } from '@mui/joy'
+import * as React from 'react'
+import { Box, Button, Card, CardContent, Grid, Snackbar, Typography } from '@mui/joy'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { usePageData } from '../../context/page-data/page-data.context.ts'
@@ -10,6 +12,7 @@ export default function Banner() {
     const { setPageData } = usePageData()
     const bannerId = useParams()
     const [banner, setBanner] = useState<BannerDto>({ imageUrl: '', link: '' })
+    const [open, setOpen] = React.useState(false)
 
     useEffect(() => {
         setPageData({ title: 'Banner details' })
@@ -20,14 +23,13 @@ export default function Banner() {
             try {
                 const data = await bannerService.getBanner(bannerId.id as string)
                 if (data) setBanner(data)
-                    console.log(data);
+                console.log(data)
             } catch (error) {
                 console.error('Failed to fetch banner:', error)
                 alert('Something went wrong while fetching the banner')
             }
         }
-        
-        
+
         if (bannerId) fetchBanner()
     }, [bannerId])
 
@@ -35,7 +37,7 @@ export default function Banner() {
         if (banner.link) {
             try {
                 await navigator.clipboard.writeText(banner.link)
-                alert('Link copied to clipboard!')
+                setOpen(true)
             } catch (error) {
                 console.error('Failed to copy link:', error)
             }
@@ -59,7 +61,7 @@ export default function Banner() {
                         level="body-md"
                         sx={{ wordBreak: 'break-all', mb: 2 }}
                     >
-                        <strong>URL:</strong> {banner.link}
+                        <strong>Source URL:</strong> {banner.link}
                     </Typography>
 
                     <Button
@@ -67,11 +69,22 @@ export default function Banner() {
                         variant="solid"
                         color="primary"
                         sx={{ width: 'fit-content' }}
+                        startDecorator={<ContentCopyIcon />}
                     >
                         Copy link
                     </Button>
                 </CardContent>
             </Card>
+            <Snackbar
+                open={open}
+                autoHideDuration={4000}
+                onClose={() => setOpen(false)}
+                variant="outlined"
+                color="success"
+                sx={{ mb: 5, mr: 7 }}
+            >
+                Copied to clipboard!
+            </Snackbar>
         </Box>
     )
 }
