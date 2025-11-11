@@ -38,12 +38,12 @@ export default function ScrollableCards<T>(props: {
         const newElements = newCards.content.map((value) => props.mapCard(value, deleteItem))
 
         setCards(prev => page === 0 ? newElements : [...prev, ...newElements])
-    }, [cards, page, deleteItem, props])
+    }, [page, deleteItem])
 
     useEffect(() => {
         if (page != 0) return
         loadBanners().catch((reason) => console.error(reason))
-    }, [loadBanners, page])
+    }, [])
 
     const loadMore = () => {
         loadBanners().catch((reason) => console.error(reason))
