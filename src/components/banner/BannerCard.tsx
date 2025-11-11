@@ -8,6 +8,13 @@ import Image from '../Image.tsx'
 
 export default function BannerCard(props: { banner?: BannerDto; delete?: () => void }) {
     const navigate = useNavigate()
+    const url = props.banner?.link
+
+    const getDomainFromUrl = () => {
+        const match = url?.match(/^https?:\/\/(?:www\.)?([^/]+)/i)
+        return match ? match[1] : url
+    }
+
 
     return (
         <Grid
@@ -44,7 +51,7 @@ export default function BannerCard(props: { banner?: BannerDto; delete?: () => v
                                 variant="text"
                                 sx={{ width: '100%', height: '100%' }}
                             >
-                                {props.banner?.link}
+                                {getDomainFromUrl()}
                             </Skeleton>
                         </Typography>
                     </Box>
