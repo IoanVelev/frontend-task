@@ -6,9 +6,11 @@ import { useEffect } from 'react'
 import { BannerDto } from '../../services/dto/banner.dto'
 import { v4 as uuidv4 } from 'uuid';
 import bannerService from '../../services/banner.service'
+import { useNavigate } from 'react-router-dom'
 
 export default function BannerCreate() {
     const { setPageData } = usePageData()
+    const navigate = useNavigate()
 
     useEffect(() => {
         setPageData({ title: 'Banner creation page' })
@@ -22,6 +24,7 @@ export default function BannerCreate() {
         }
         
         bannerService.createBanner(newBanner);
+        navigate('/banners')
     }
     return (
         <>
