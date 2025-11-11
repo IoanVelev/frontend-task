@@ -16,15 +16,21 @@ export default function BannerCreate() {
         setPageData({ title: 'Banner creation page' })
     }, [setPageData])
 
-    const handleCreate = (values: BannerDto) => {
+    const handleCreate = async (values: BannerDto) => {
         const newBanner: BannerDto = {
             id: uuidv4(),
             imageUrl: values.imageUrl,
             link: values.link
         }
+
+        try {
+            await bannerService.createBanner(newBanner)
+            navigate('/banners')
+        } catch (error) {
+            console.error('Failed to create banner.', error)
+            alert('Something went wrong while creating the banner.')
+        }
         
-        bannerService.createBanner(newBanner);
-        navigate('/banners')
     }
     return (
         <>
