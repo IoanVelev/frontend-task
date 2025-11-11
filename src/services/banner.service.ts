@@ -42,7 +42,15 @@ class BannerService {
     }
 
     async updateBanner(id: string, banner: BannerDto) {
-        //todo update banner logic
+        const banners = this.listBanners()
+        const index = banners.findIndex(banner => banner.id === id)
+
+        if(index === -1) {
+            throw new Error('Banner not found')
+        }
+
+        banners[index] = { ...banners[index], ...banner}
+        this.saveBanners(banners)
     }
 
     async deleteBanner(id: string) {
