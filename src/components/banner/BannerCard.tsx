@@ -5,6 +5,7 @@ import IconButton from '@mui/joy/IconButton'
 import { Delete } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import Image from '../Image.tsx'
+import bannerService from '../../services/banner.service.ts'
 
 export default function BannerCard(props: { banner?: BannerDto; delete?: () => void }) {
     const navigate = useNavigate()
@@ -15,6 +16,10 @@ export default function BannerCard(props: { banner?: BannerDto; delete?: () => v
         return match ? match[1] : url
     }
 
+    const onDelete = () => {
+        bannerService.deleteBanner(props.banner!.id!)
+        navigate('/banners')
+    }
 
     return (
         <Grid
@@ -71,6 +76,7 @@ export default function BannerCard(props: { banner?: BannerDto; delete?: () => v
                         variant="outlined"
                         size="sm"
                         sx={{ width: '20%', alignSelf: 'center' }}
+                        onClick={() => onDelete()}
                     >
                         <Delete />
                     </IconButton>
